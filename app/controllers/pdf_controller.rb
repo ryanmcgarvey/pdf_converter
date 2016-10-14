@@ -21,7 +21,7 @@ class PdfController < ApplicationController
   private
 
   def execute(pdf_file_name)
-    cmd = "pdf2htmlex --data-dir pdf2htmlex_config --printing=0 --process-outline=0 #{pdf_file_name} #{html_file_name}"
+    cmd = "pdf2htmlEx --data-dir pdf2htmlex_config --printing=0 --process-outline=0 #{pdf_file_name} #{html_file_name}"
     Rails.logger.error `#{cmd}`
     html_content = File.read(html_file_name)
     render html: html_content.html_safe
