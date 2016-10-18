@@ -3,6 +3,7 @@ class PdfController < ApplicationController
   def create
     if params[:pdf_content].is_a? String
       log `pwd`
+      log `cd #{Rails.root}`
       pdf_file_name = File.join Rails.root, "documents", (file_name + '.pdf')
       log "Creating #{pdf_file_name}"
       file = File.new(pdf_file_name, 'w+')
