@@ -23,6 +23,20 @@
   padding:0;
   border:0; /* required for lazy page loading in pdf2htmlEX.js (page visibility test) */
 }
+
+#page-back{
+  position: absolute;
+  top: 202px;
+  left: 20px;
+  font-size: 50px;
+}
+
+#page-forward{
+  position: absolute;
+  top: 202px;
+  right: 20px;
+  font-size: 50px;
+}
 @media screen {
   /* for sidebar */
   #sidebar.opened + #page-container { left:250px; }
@@ -76,6 +90,7 @@
  * So do not increase the specificity (e.g. ".classname" -> "#page-container .classname")
  */
 .pf { /* page */
+  display: none;
   position:relative;
   background-color:white;
   overflow: hidden;

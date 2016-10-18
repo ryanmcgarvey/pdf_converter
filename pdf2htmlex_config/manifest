@@ -23,6 +23,7 @@
 <meta charset="utf-8"/>
 <meta name="generator" content="pdf2htmlEX"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<script src="https://use.fontawesome.com/f49ff406d0.js"></script>
 """
 
 #############
@@ -55,6 +56,8 @@ $css
 # });
 #TEST_IGNORE_BEGIN
 @pdf2htmlEX.min.js
+@jquery.min.js
+@presentation.js
 """
 <script>
 try{
@@ -100,9 +103,15 @@ $outline
 # check base.css for an example and requirements of its CSS styles
 """
 <div id="page-container">
+<div id="page-back" onclick="move_deck_backward()">
+  <i class="fa fa-arrow-left" aria-hidden="true"></i>
+</div>
 """
 $pages
 """
+<div id="page-forward" onclick="move_deck_forward()">
+  <i class="fa fa-arrow-right" aria-hidden="true"></i>
+</div>
 </div>
 """
 
