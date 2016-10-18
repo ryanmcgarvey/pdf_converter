@@ -2,7 +2,7 @@ require 'securerandom'
 class PdfController < ApplicationController
   def create
     if params[:pdf_content].is_a? String
-      pdf_file_name = File.join Rails.root, "documents", (file_name + '.pdf')
+      pdf_file_name = File.join "/tmp", (file_name + '.pdf')
       log "Creating #{pdf_file_name}"
       file = File.new(pdf_file_name, 'w+')
       file.write(params[:pdf_content])
@@ -32,7 +32,7 @@ class PdfController < ApplicationController
   end
 
   def html_file_name
-    @_html_file_name ||= File.join Rails.root, "documents", (file_name + '.html')
+    @_html_file_name ||= File.join "/tmp", (file_name + '.html')
   end
 
   def file_name
