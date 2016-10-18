@@ -2,13 +2,13 @@ require 'securerandom'
 class PdfController < ApplicationController
   def create
     if params[:pdf_content].is_a? String
-      pdf_file_name = File.join "tmp", (file_name + '.pdf')
+      pdf_file_name = File.join Rails.root, "tmp", (file_name + '.pdf')
       log "Creating #{pdf_file_name}"
       file = File.new(pdf_file_name, 'w+')
       file.write(params[:pdf_content])
-      file.close
       execute(file.path)
-      # File.delete(pdf_file_name)
+      file.close
+      File.delete(pdf_file_name)
     else
       execute(params[:pdf_content].tempfile.path)
     end
@@ -21,10 +21,10 @@ class PdfController < ApplicationController
     cmd = "(cd #{Rails.root}; pdf2htmlEX --data-dir #{data_dir} --printing=0 --process-outline=0 #{pdf_file_name} #{html_file_name} 2>&1)"
     log cmd
     log `#{cmd}`
-    html_content = File.read(html_file_name)
+    html_content = File.read(html_full_path)
     log "Rendered #{html_file_name}: #{html_content.size} bytes"
     render html: html_content.html_safe
-    # File.delete(html_file_name)
+    File.delete(html_full_path)
   end
 
   def log(str)
@@ -33,6 +33,10 @@ class PdfController < ApplicationController
 
   def html_file_name
     @_html_file_name ||= File.join "tmp", (file_name + '.html')
+  end
+
+  def html_full_path
+    File.join Rails.root, html_file_name
   end
 
   def data_dir
