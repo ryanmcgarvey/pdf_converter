@@ -8,7 +8,7 @@ class PdfController < ApplicationController
       file.write(params[:pdf_content])
       execute(file.path)
       file.close
-      File.delete(file)
+      Rails.logger.error `rm #{pdf_file_name}`
     else
       execute(params[:pdf_content].tempfile.path)
     end
