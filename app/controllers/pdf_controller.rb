@@ -3,6 +3,7 @@ class PdfController < ApplicationController
   def create
     if params[:pdf_content].is_a? String
       pdf_file_name = file_name + '.pdf'
+      Rails.logger.error "Creating #{pdf_file_name}"
       file = File.new(pdf_file_name, 'w+')
       file.write(params[:pdf_content])
       execute(file.path)
@@ -16,6 +17,7 @@ class PdfController < ApplicationController
   private
 
   def execute(pdf_file_name)
+    Rails.logger.error "Converting #{pdf_file_name}"
     cmd = "pdf2htmlEX --data-dir pdf2htmlex_config --printing=0 --process-outline=0 #{pdf_file_name} #{html_file_name}"
     Rails.logger.error `#{cmd}`
     html_content = File.read(html_file_name)
