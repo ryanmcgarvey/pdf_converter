@@ -6,16 +6,11 @@ class PdfController < ApplicationController
       file = File.new(pdf_file_name, 'w+')
       file.write(params[:pdf_content])
       execute(file.path)
+      file.close
       File.delete(file)
     else
       execute(params[:pdf_content].tempfile.path)
     end
-  end
-
-  def from_content
-    pdf_content = params[:pdf_content]
-    pdf_file_name = SecureRandom.hex + '.html'
-    execute(pdf_file_name)
   end
 
   private
