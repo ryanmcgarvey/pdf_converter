@@ -2,8 +2,8 @@ require 'securerandom'
 class PdfController < ApplicationController
   def create
     if params[:pdf_content].is_a? String
-      log `pwd`
       log `cd #{Rails.root}`
+      log `pwd`
       pdf_file_name = File.join Rails.root, "documents", (file_name + '.pdf')
       log "Creating #{pdf_file_name}"
       file = File.new(pdf_file_name, 'w+')
@@ -20,7 +20,7 @@ class PdfController < ApplicationController
 
   def execute(pdf_file_name)
     log "Converting #{pdf_file_name}"
-    cmd = "pdf2htmlEX --data-dir pdf2htmlex_config --printing=0 --process-outline=0 #{pdf_file_name} #{html_file_name}"
+    cmd = "cd #{Rails.root}; pdf2htmlEX --data-dir pdf2htmlex_config --printing=0 --process-outline=0 #{pdf_file_name} #{html_file_name}"
     log cmd
     log `#{cmd}`
     html_content = File.read(html_file_name)
