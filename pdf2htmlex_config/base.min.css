@@ -27,14 +27,14 @@
 #page-back{
   position: absolute;
   top: 202px;
-  left: 20px;
+  left: 0px;
   font-size: 50px;
 }
 
 #page-forward{
   position: absolute;
   top: 202px;
-  right: 20px;
+  right: 0px;
   font-size: 50px;
 }
 @media screen {
