@@ -8,7 +8,7 @@ class PdfController < ApplicationController
       file.write(params[:pdf_content])
       execute(file.path)
       file.close
-      # Rails.logger.error `rm #{pdf_file_name}`
+      File.delete(pdf_file_name)
     else
       execute(params[:pdf_content].tempfile.path)
     end
@@ -18,13 +18,13 @@ class PdfController < ApplicationController
 
   def execute(pdf_file_name)
     log "Converting #{pdf_file_name}"
-    cmd = "/usr/bin/pdf2htmlEX --data-dir pdf2htmlex_config --printing=0 --process-outline=0 #{pdf_file_name} #{html_file_name}"
+    cmd = "/usr/bin/pdf2htmlEX --data-dir #{data_dir} --printing=0 --process-outline=0 #{pdf_file_name} #{html_file_name}"
     log cmd
     log `#{cmd}`
     html_content = File.read(html_file_name)
     log "Rendered #{html_file_name}: #{html_content.size} bytes"
     render html: html_content.html_safe
-    # File.delete(html_file_name)
+    File.delete(html_file_name)
   end
 
   def log(str)
@@ -33,6 +33,10 @@ class PdfController < ApplicationController
 
   def html_file_name
     @_html_file_name ||= File.join "/tmp", (file_name + '.html')
+  end
+
+  def data_dir
+    File.join Rails.root, "pdf2htmlex_config"
   end
 
   def file_name
