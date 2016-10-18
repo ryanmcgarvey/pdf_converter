@@ -8,7 +8,7 @@ class PdfController < ApplicationController
       file.write(params[:pdf_content])
       execute(file.path)
       file.close
-      Rails.logger.error `rm #{pdf_file_name}`
+      # Rails.logger.error `rm #{pdf_file_name}`
     else
       execute(params[:pdf_content].tempfile.path)
     end
@@ -24,7 +24,7 @@ class PdfController < ApplicationController
     html_content = File.read(html_file_name)
     Rails.logger.error "Rendered #{html_file_name}: #{html_content.size} bytes"
     render html: html_content.html_safe
-    File.delete(html_file_name)
+    # File.delete(html_file_name)
   end
 
   def html_file_name
