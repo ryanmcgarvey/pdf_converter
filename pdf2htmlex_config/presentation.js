@@ -36,13 +36,13 @@ function move_deck_backward() {
 $(document).keydown(function(e) {
   // left
   if (e.keyCode === 37) {
-    move_deck_forward();
+    move_deck_backward();
     return false;
   }
 
   //right
   if (e.keyCode === 39) {
-    move_deck_backward();
+    move_deck_forward();
     return false;
   }
 });
