@@ -45,5 +45,16 @@ $(document).keydown(function(e) {
     move_deck_forward();
     return false;
   }
+
+  if (e.keyCode === 13) {
+    parent.postMessage(e.keyCode, "*");
+    return false;
+  }
+
+  // esc
+  if (e.keyCode === 27) {
+    parent.postMessage(e.keyCode, "*");
+    return false;
+  }
 });
 
