@@ -34,7 +34,6 @@ function move_deck_backward() {
 }
 
 $(document).keydown(function(e) {
-
   // left
   if (e.keyCode === 37) {
     move_deck_forward();
@@ -46,17 +45,5 @@ $(document).keydown(function(e) {
     move_deck_backward();
     return false;
   }
-
-  // enter
-  // if (e.keyCode === 13) {
-  // show_slide(current_slide_index - 1);
-  // return false;
-  // }
-
-  // esc
-  // if (e.keyCode === 27) {
-  // show_slide(current_slide_index - 1);
-  // return false;
-  // }
 });
 

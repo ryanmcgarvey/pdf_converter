@@ -96,7 +96,44 @@
   overflow: hidden;
   margin:0;
   border:0; /* required by pdf2htmlEX.js for page visibility test */
+  zoom: 1.0;
+  -moz-transform: scale(1.0);
 }
+
+@media (min-width: 1156px) {
+  .pf {
+    zoom: 1.5;
+    -moz-transform: scale(1.5);
+  }
+  #page-back{
+    top: 303px;
+    font-size: 75px;
+  }
+
+  #page-forward{
+    top: 303px;
+    font-size: 75px;
+  }
+}
+
+
+@media (min-width: 1540px) {
+  .pf {
+    zoom: 2.0;
+    -moz-transform: scale(2.0);
+  }
+  #page-back{
+    top: 404px;
+    font-size: 100px;
+  }
+
+  #page-forward{
+    top: 404px;
+    font-size: 100px;
+  }
+}
+
+
 .pc { /* content of a page */
   position:absolute;
   border:0;
