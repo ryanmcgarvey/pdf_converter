@@ -16,9 +16,9 @@ class PdfController < ApplicationController
 
   private
 
-  def execute(pdf_file_name)
+  def execute(pdf_file_name, data_dir: File.join(Rails.root, "pdf2htmlex_config"), max_width: 720, max_height: 405)
     log "Converting #{pdf_file_name}"
-    cmd = "(cd #{Rails.root}; pdf2htmlEX --data-dir #{data_dir} --printing=0 --process-outline=0 #{pdf_file_name} #{html_file_name} 2>&1)"
+    cmd = "(cd #{Rails.root}; pdf2htmlEX --data-dir #{data_dir} --printing=0 --process-outline=0 --fit-width=#{max_width} --fit-height=#{max_height} #{pdf_file_name} #{html_file_name} 2>&1)"
     log cmd
     log `#{cmd}`
     html_content = File.read(html_full_path)
@@ -39,11 +39,8 @@ class PdfController < ApplicationController
     File.join Rails.root, html_file_name
   end
 
-  def data_dir
-    File.join Rails.root, "pdf2htmlex_config"
-  end
-
   def file_name
     @_file_name ||= SecureRandom.hex[0..8]
   end
+
 end
