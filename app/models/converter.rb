@@ -26,6 +26,7 @@ class Converter < Struct.new(:pdf_file_name)
     html_content = File.read(html_full_path)
     log "Rendered #{html_file_name}: #{html_content.size} bytes"
     File.delete(html_full_path)
+    File.delete("#{pdf_file_name}.opt")
     html_content
   end
 
